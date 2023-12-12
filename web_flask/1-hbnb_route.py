@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""Start a flask web application on localhost
-"""
+"""Start a flask web application on localhost"""
+
+
 from flask import Flask
 app = Flask(__name__)
 
