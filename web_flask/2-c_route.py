@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Script starts a Flask web application"""
+"""Start a flask web application on localhos"""
 
 from flask import Flask
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def index():
+def hello():
     """Display Hello HBNB!"""
     return 'Hello HBNB!'
 
