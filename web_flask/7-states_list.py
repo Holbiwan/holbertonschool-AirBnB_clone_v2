@@ -1,24 +1,25 @@
 #!/usr/bin/python3
-"""Start a Flask application on localhost."""
+"""Starts a Flask application on localhost"""
 
 from models import storage
 from flask import Flask, render_template
+from models.state import State
 
 app = Flask(__name__)
 
-@app.teardown_appcontext
-def appcontext_teardown(exc=None):
-    """Called on teardown of app contexts.
-
-    After each request: remove the current SQLAlchemy session.
-    """
-    storage.close()
 
 @app.route('/states_list', strict_slashes=False)
-def conditional_templating(n=None):
-    """Check input data using a template."""
-    return render_template('7-states_list.html', states=storage.all("State"))
+def states_list():
+    """Check input data using a template"""
+    states = storage.all(State).values()
+    return render_template('7-states_list.html', states=states)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
 
+@app.teardown_appcontext
+def remove_session(exception):
+    """After each request remove current SQLAlchemy Session"""
+    storage.close()
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port="5000")
