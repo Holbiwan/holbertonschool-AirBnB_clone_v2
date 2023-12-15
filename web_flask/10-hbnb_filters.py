@@ -1,20 +1,31 @@
 #!/usr/bin/python3
-"""Script to start a Flask app on localhost."""
+"""
+Start a Flask application on localhost"""
+
 from models import storage
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.teardown_appcontext
-def appcontext_teardown(exc=None):
-    """Called on teardown of app contexts."""
+def teardown_appcontext(exc=None):
+    """
+    Called on teardown of app contexts,
+    for more info on contexts visit
+    -> http://flask.pocoo.org/docs/1.0/appcontext/
+    Storage.close() closes the SQL scoped session or reloads file storage.
+    """
     storage.close()
 
+app.teardown_appcontext(teardown_appcontext)
+
 @app.route('/hbnb_filters', strict_slashes=False)
-def conditional_templating():
-    """Checking input data using templating."""
+def hbnb_filters():
+    """
+    Checking input data using templating
+    """
     states = sorted(storage.all("State").values(), key=lambda x: x.name)
     amenities = sorted(storage.all("Amenity").values(), key=lambda x: x.name)
+
     return render_template('10-hbnb_filters.html', states=states, amenities=amenities)
 
 if __name__ == '__main__':
