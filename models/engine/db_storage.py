@@ -1,14 +1,20 @@
 #!/usr/bin/python3
 """This module defines a class to manage DB storage for hbnb clone"""
-from models.base_model import Base
+
+import sqlalchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, scoped_session
+
+import models
+from models.base_model import BaseModel, Base
 from models.user import User
 from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+
+
 from os import getenv
 
 MYSQL_USER = getenv('HBNB_MYSQL_USER')
@@ -23,7 +29,7 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        """Instantiate a DBStorage object"""
+        """Initiate a DBStorage object"""
         self.__engine = create_engine(
             'mysql+mysqldb://{}:{}@{}/{}?charset=utf8mb4'.format(
                 MYSQL_USER, MYSQL_PWD, MYSQL_HOST, MYSQL_DB),
