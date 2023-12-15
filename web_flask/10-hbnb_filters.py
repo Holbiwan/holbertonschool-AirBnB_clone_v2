@@ -2,23 +2,38 @@
 """Script to start a Flask web application"""
 
 from flask import Flask, render_template
+
 from models import storage
+from models.amenity import Amenity
+from models.state import State
+
+
 app = Flask(__name__)
+'''Flask application instance'''
+app.url_map.strict_slashes = False
+
+
+@app.route('/hbnb_filters')
+def hbnb_filters():
+    '''The hbnb_filters page.'''
+    all_states = list(storage.all(State).values())
+    amenities = list(storage.all(Amenity).values())
+    all_states.sort(key=lambda x: x.name)
+    amenities.sort(key=lambda x: x.name)
+    for state in all_states:
+        state.cities.sort(key=lambda x: x.name)
+    ctxt = {
+        'states': all_states,
+        'amenities': amenities
+    }
+    return render_template('10-hbnb_filters.html', **ctxt)
 
 
 @app.teardown_appcontext
-def appcontext_teardown(exc=None):
-    """Called on teardown of app contexts"""
+def flask_teardown(exc):
+    '''Flask request context end event listener'''
     storage.close()
 
 
-@app.route('/hbnb_filters', strict_slashes=False)
-def hbnb_filters():
-    """Display HTML page with filters"""
-    states = sorted(list(storage.all("State").values()), key=lambda x: x.name)
-    amenities = sorted(list(storage.all("Amenity").values()), key=lambda x: x.name)
-    return render_template('10-hbnb_filters.html', states=states, amenities=amenities)
-
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port='5000')
