@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""Start a flask app on localhost"""
-
+"""script to start a flask app on localhost
+"""
 from models import storage
 from flask import Flask
 from flask import render_template
