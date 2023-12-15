@@ -7,11 +7,11 @@
     {% if not_found %}
         <h1>Not found!</h1>
     {% else %}
-        {% if state %}
+        {% if id %}
             <h1>State: {{ state.name }}</h1>
             <h3>Cities:</h3>
             <ul>
-                {% for city in cities %}
+                {% for city in state.cities | sort(attribute='name') %}
                     <li>{{ city.id }}: <b>{{ city.name }}</b></li>
                 {% endfor %}
             </ul>
