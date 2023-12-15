@@ -16,14 +16,14 @@
       <section class="filters">
         <div class="locations">
           <h3>States</h3>
-          <h4></h4>
+          <h4>&nbsp;</h4>
           <div class="popover">
             <ul>
               {% for state in states %}
                 <li>
                   <h2>{{ state.name }}:</h2>
                   <ul>
-                    {% for city in state.cities | sort(attribute='name') %}
+                    {% for city in state.cities|sort(attribute='name') %}
                       <li>{{ city.name }}</li>
                     {% endfor %}
                   </ul>
@@ -34,7 +34,7 @@
         </div>
         <div class="amenities">
           <h3>Amenities</h3>
-          <h4></h4>
+          <h4>&nbsp;</h4>
           <div class="popover">
             <ul>
               {% for amenity in amenities %}
