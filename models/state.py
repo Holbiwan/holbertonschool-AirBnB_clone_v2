@@ -7,6 +7,8 @@ from models.city import City
 from os import getenv
 import models
 import shlex
+import sqlalchemy
+from sqlalchemy.ext.declarative import declarative_base
 
 
 class State(BaseModel, Base):
