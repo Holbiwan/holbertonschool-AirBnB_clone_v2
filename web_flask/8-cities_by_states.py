@@ -2,8 +2,8 @@
 """Start a Flask application on localhost."""
 
 from models import storage
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template
+from models.state
 
 app = Flask(__name__)
 
