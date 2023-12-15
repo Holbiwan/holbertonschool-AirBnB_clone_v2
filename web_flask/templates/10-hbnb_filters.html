@@ -1,46 +1,50 @@
-<!DOCTYPE html>
-<HTML lang="en">
+<!DOCTYPE HTML>
+<HTML LANG="en">
 <HEAD>
-    <META charset="utf-8">
-    <META http-equiv="X-UA-Compatible" content="IE=edge">
-    <META name="viewport" content="width=device-width,initial-scale=1.0">
-    <LINK rel="icon" href="{{ url_for('static', filename = 'images/icon.png') }}">
+    <META CHARSET="utf-8">
+    <META HTTP-EQUIV="X-UA-Compatible" CONTENT="IE=edge">
+    <META NAME="viewport" CONTENT="width=device-width,initial-scale=1.0">
+    <LINK REL="icon" HREF="{{ url_for('static', filename='images/icon.png') }}">
     <TITLE>AirBnB Clone</TITLE>
-    <LINK rel="stylesheet" href="{{ url_for('static', filename = 'styles/4-common.css') }}"/>
-    <LINK rel="stylesheet" href="{{ url_for('static', filename = 'styles/3-header.css') }}"/>
-    <LINK rel="stylesheet" href="{{ url_for('static', filename = 'styles/3-footer.css') }}"/>
-    <LINK rel="stylesheet" href="{{ url_for('static', filename = 'styles/6-filters.css') }}"/>
+    <LINK REL="stylesheet" HREF="{{ url_for('static', filename='styles/4-common.css') }}">
+    <LINK REL="stylesheet" HREF="{{ url_for('static', filename='styles/3-header.css') }}">
+    <LINK REL="stylesheet" HREF="{{ url_for('static', filename='styles/3-footer.css') }}">
+    <LINK REL="stylesheet" HREF="{{ url_for('static', filename='styles/6-filters.css') }}">
 </HEAD>
 <BODY>
     <HEADER>
-        <A href="/hbnb_filters"></A>
+        <A HREF="/hbnb_filters"></A>
     </HEADER>
-    <DIV class="container">
-        <SECTION class="filters">
-            <DIV class="locations">
+    <DIV CLASS="container">
+        <SECTION CLASS="filters">
+            <DIV CLASS="locations">
                 <H3>States</H3>
                 <H4>&nbsp;</H4>
-                <UL class="popover">
-                    {% for state in states %}
-                    <LI>
-                        <H2>{{ state.name }}</H2>
-                        <UL>
-                            {% for city in state.cities %}
-                            <LI>{{ city.name }}</LI>
-                            {% endfor %}
-                        </UL>
-                    </LI>
-                    {% endfor %}
-                </UL>
+                <DIV CLASS="popover">
+                    <UL>
+                        {% FOR state IN states %}
+                        <LI>
+                            <H2>{{ state.name }}</H2>
+                            <UL>
+                                {% FOR city IN state.cities %}
+                                <LI>{{ city.name }}</LI>
+                                {% ENDFOR %}
+                            </UL>
+                        </LI>
+                        {% ENDFOR %}
+                    </UL>
+                </DIV>
             </DIV>
-            <DIV class="amenities">
+            <DIV CLASS="amenities">
                 <H3>Amenities</H3>
                 <H4>&nbsp;</H4>
-                <UL class="popover">
-                    {% for amenity in amenities %}
-                    <LI>{{ amenity.name }}</LI>
-                    {% endfor %}
-                </UL>
+                <DIV CLASS="popover">
+                    <UL>
+                        {% FOR amenity IN amenities %}
+                        <LI>{{ amenity.name }}</LI>
+                        {% ENDFOR %}
+                    </UL>
+                </DIV>
             </DIV>
             <BUTTON>Search</BUTTON>
         </SECTION>
