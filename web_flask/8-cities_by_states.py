@@ -8,16 +8,16 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route('/states_list', strict_slashes=False)
-def states_list():
-    """Check input data using a template"""
+@app.route('/cities_by_states', strict_slashes=False)
+def cities_by_states():
+    """Display a HTML page with a list of states and their cities"""
     states = storage.all(State).values()
-    return render_template('7-states_list.html', states=states)
+    return render_template('8-cities_by_states.html', states=sorted(states, key=lambda x: x.name))
 
 
 @app.teardown_appcontext
 def remove_session(exception):
-    """After each request remove current SQLAlchemy Session"""
+    """After each request, remove the current SQLAlchemy Session"""
     storage.close()
 
 
