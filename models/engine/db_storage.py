@@ -14,7 +14,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
-
 from os import getenv
 
 MYSQL_USER = getenv('HBNB_MYSQL_USER')
