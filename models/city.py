@@ -1,18 +1,19 @@
 #!/usr/bin/python3
-"""City Module for HBNB project."""
+""" City Module for HBNB project """
+import sqlalchemy
+import models
+from models.place import Place
+from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
-from models.base_model import BaseModel, Base
+from sqlalchemy.ext.declarative import declarative_base
 
 
 class City(BaseModel, Base):
-    """
-    City class for storing city information.
-
+    """This is the class for City
     Attributes:
-        name (str): The name of the city.
-        state_id (str): The state id.
-        places (relationship): Relationship to Place model.
+        state_id: The state id
+        name: input name
     """
     __tablename__ = "cities"
     name = Column(String(128), nullable=False)
@@ -20,6 +21,6 @@ class City(BaseModel, Base):
     places = relationship("Place", cascade='all, delete, delete-orphan',
                           backref="cities")
 
-    def __init__(self, *args, **kwargs):
-        """Initialize City instance."""
-        super().__init__(*args, **kwargs)
+def _init_init(self, *args, **kwargs):
+    """initialize inerited"""
+    super()._init_(*args, **kwargs)
